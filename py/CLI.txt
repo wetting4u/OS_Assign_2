@@ -1,0 +1,2 @@
+- 用 python memsim.py trace1 4 lru debug → 就會跑 trace1，用 4 個 frames、LRU 策略，印 debug 訊息。
+- 如果換 quiet → 最後只印 summary，結果應該跟老師給的 trace1-4frames-lru 一樣。
