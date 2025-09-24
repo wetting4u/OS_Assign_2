@@ -55,13 +55,25 @@ def main():
     
     algorithms = ['lru', 'clock', 'rand']
     
-    # 定義各trace的測試frame範圍
-    frame_sets = {
-        'trace/bzip.trace': [10, 20, 50, 100, 200, 300, 400, 500],
-        'trace/swim.trace': [10, 20, 50, 100, 500, 1000, 2000, 3000],
-        'trace/gcc.trace': [10, 20, 50, 100, 1000, 2000, 3000, 4000, 5000],
-        'trace/sixpack.trace': [10, 20, 50, 100, 1000, 2000, 3000, 4000, 5000]
+    # 各程式的unique page counts (從之前分析得出)
+    unique_pages = {
+        'trace/bzip.trace': 317,
+        'trace/swim.trace': 2543,
+        'trace/gcc.trace': 2852,
+        'trace/sixpack.trace': 3890
     }
+    
+    # 為每個trace生成基於unique pages百分比的frame範圍
+    frame_sets = {}
+    for trace in trace_files:
+        base_pages = unique_pages[trace]
+        
+        # 使用組員建議的公式：5%間隔 + 1%起始點
+        x = [round(round(i*0.01, 2)*base_pages) for i in range(5, 125, 5)]  # 5%, 10%, 15%, ..., 120%
+        x.insert(0, round(0.01*base_pages))  # 插入1%作為最小值
+        
+        # 確保最少10 frames並去除重複
+        frame_sets[trace] = sorted(list(set([max(10, frames) for frames in x])))
     
     results = []
     total_experiments = sum(len(frame_sets[trace]) * len(algorithms) for trace in trace_files)

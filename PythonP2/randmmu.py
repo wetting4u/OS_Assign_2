@@ -1,7 +1,6 @@
 from mmu import MMU
 import random
 
-# TODO: Modified Bit??? check readmePython
 class RandMMU(MMU):
     def __init__(self, frames):
         self.page_fault_count = 0
@@ -10,7 +9,7 @@ class RandMMU(MMU):
         self.is_debug_mode = False
         self.table_size = frames
         self.table = []
-        random.seed(997)
+        random.seed(999)
 
     def set_debug(self):
         self.is_debug_mode = True
@@ -24,8 +23,8 @@ class RandMMU(MMU):
                 print(f"{page_number} already in table, current table is:")
                 print(self.table)
         else:
-            self.page_fault_count += 1
-            self.read_disk_count += 1
+            #self.page_fault_count += 1
+            #self.read_disk_count += 1
             if self.is_debug_mode:
                 print(f"{page_number} is not in table, current table is:")
                 print(self.table)
@@ -40,6 +39,8 @@ class RandMMU(MMU):
     def write_memory(self, page_number):
 
         if page_number not in self.table:
+            self.page_fault_count += 1
+            self.read_disk_count += 1
             if self.is_debug_mode:
                 print("table before writing:")
                 print(self.table)
@@ -54,6 +55,7 @@ class RandMMU(MMU):
                 print("table after writing:")
                 print(self.table)
         else:
+            
             if self.is_debug_mode:
                 print(f"{page_number} already in table, no need write")
 
