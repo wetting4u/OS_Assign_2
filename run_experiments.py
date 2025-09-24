@@ -68,7 +68,7 @@ def main():
     for trace in trace_files:
         base_pages = unique_pages[trace]
         
-        # 使用組員建議的公式：5%間隔 + 1%起始點
+        # 5%間隔 + 1%起始點
         x = [round(round(i*0.01, 2)*base_pages) for i in range(5, 125, 5)]  # 5%, 10%, 15%, ..., 120%
         x.insert(0, round(0.01*base_pages))  # 插入1%作為最小值
         
