@@ -41,7 +41,7 @@ def create_performance_plots_enhanced(df):
         
         ax1.set_xlabel('Memory Frames')
         ax1.set_ylabel('Page Fault Rate')
-        ax1.set_title('Page Fault Rate vs Memory Frames')
+        ax1.set_title('Page Fault Performance')
         ax1.legend()
         ax1.grid(True, alpha=0.3)
         
@@ -66,7 +66,7 @@ def create_performance_plots_enhanced(df):
         
         ax2.set_xlabel('Memory Frames')
         ax2.set_ylabel('Disk Reads')
-        ax2.set_title('Disk Reads vs Memory Frames')
+        ax2.set_title('Disk Reads Performance')
         ax2.legend()
         ax2.grid(True, alpha=0.3)
         
@@ -90,7 +90,7 @@ def create_performance_plots_enhanced(df):
         
         ax3.set_xlabel('Memory Frames')
         ax3.set_ylabel('Disk Writes')
-        ax3.set_title('Disk Writes vs Memory Frames')
+        ax3.set_title('Disk Writes Performance')
         ax3.legend()
         ax3.grid(True, alpha=0.3)
         
